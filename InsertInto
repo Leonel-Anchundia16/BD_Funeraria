@@ -1,0 +1,125 @@
+/*==============================================================*/
+/* Insertar Funerarias                                          */
+/*==============================================================*/
+
+insert into FUNERARIA_ETERNIDAD values (1,'calle 103 av 9');
+
+
+/*==============================================================*/
+/* Insertar los Servicios de la Funeraria                       */
+/*==============================================================*/
+
+insert into SERVICIO values (1,'Acompañamiento Musical',150,'15:00');
+insert into SERVICIO values (2,'Comedor',200,'14:00');
+insert into SERVICIO values (3,'Transporte al Cementerio',100,'15:45');
+insert into SERVICIO values (4,'Embalsamamiento',400,'08:00');
+insert into SERVICIO values (5,'Venta de Ataud',300,'10:00');
+
+/*==============================================================*/
+/* Insertar Tipos de Empleados                                  */
+/*==============================================================*/
+
+insert into TIPO_EMPLEADO values (1,'Vendedor');
+insert into TIPO_EMPLEADO values (2,'Mantenimiento');
+insert into TIPO_EMPLEADO values (3,'Embalsamador');
+insert into TIPO_EMPLEADO values (4,'Maquillista');
+
+/*==============================================================*/
+/* Insertar los Empleados                                       */
+/*==============================================================*/
+
+insert into EMPLEADO values (1,1,1,'Pedro','Lopez','Manta','15/01/1995','16/08/2015');
+insert into EMPLEADO values (2,1,1,'Juan','Lucas','Manta','07/07/1999','16/08/2015');
+insert into EMPLEADO values (3,1,1,'Andrea','Mero','Manta','15/05/2000','16/08/2015');
+insert into EMPLEADO values (4,1,2,'Bryan','Mendoza','Montecristi','12/11/2001','16/09/2016');
+insert into EMPLEADO values (5,1,2,'Iker','Lopez','Manta','19/09/1999','16/09/2016');
+insert into EMPLEADO values (6,1,3,'Manuel','Quimis','Manta','25/12/1997','16/10/2017');
+insert into EMPLEADO values (7,1,4,'Juana','Velez','Montecristi','17/11/1998','16/11/2017');
+
+
+
+/*==============================================================*/
+/* Insertar las salas de velatorios                             */
+/*==============================================================*/
+
+insert into SALA_VELATORIO values (1,1,'40 x 50','calle 107 av 10',200,'10:00');
+insert into SALA_VELATORIO values (2,1,'40 x 50','calle 107 av 10',200,'11:00');
+insert into SALA_VELATORIO values (3,1,'40 x 50','calle 107 av 10',200,'11:30');
+insert into SALA_VELATORIO values (4,1,'40 x 50','calle 107 av 10',200,'12:00');
+
+
+/*==============================================================*/
+/* Insertar las causas de fallecimientos                        */
+/*==============================================================*/
+
+insert into CAUSA_FALLECIMIENTO values (1,'Covid19');
+insert into CAUSA_FALLECIMIENTO values (2,'Infarto');
+insert into CAUSA_FALLECIMIENTO values (3,'Cancer');
+insert into CAUSA_FALLECIMIENTO values (4,'Diabetes');
+insert into CAUSA_FALLECIMIENTO values (5,'Accidente');
+
+
+
+/*==============================================================*/
+/* Insertar los Fallecidos                                      */
+/*==============================================================*/
+
+insert into FALLECIDO values (1,1,'Juan','Velasco','Masculino','11/11/1985','6/12/2020','10:30');
+insert into FALLECIDO values (2,1,'Adrian','Smith','Masculino','08/11/1990','12/06/2020','15:45');
+insert into FALLECIDO values (3,1,'Alejandra','Lucas','Femenino','11/08/2000','06/08/2020','12:00');
+insert into FALLECIDO values (4,2,'Julio','Lopez','Masculino','11/04/1999','06/12/2020','18:30');
+insert into FALLECIDO values (5,2,'Mario','Valeriano','Masculino','18/11/1995','06/09/2019','10:50');
+insert into FALLECIDO values (6,3,'Isabel','Muentes','Femenino','11/06/1999','17/08/2020','09:15');
+insert into FALLECIDO values (7,1,'Jose','Posligua','Masculino','19/03/1993','22/01/2020','17:30');
+insert into FALLECIDO values (8,4,'Daniela','Mantuano','Femenino','24/09/1997','29/07/2020','14:45');
+insert into FALLECIDO values (9,4,'Adriana','Quijije','Femenino','11/10/1989','06/09/2020','15:30');
+insert into FALLECIDO values (10,5,'Juana','Vela','Femenino','10/10/1989','09/04/2020','19:30');
+
+
+
+/*==============================================================*/
+/* Insertar los Clientes                                        */
+/*==============================================================*/
+
+insert into CLIENTE values (1,'Maria','Velasco','0987654321','maria@gmail.com');
+insert into CLIENTE values (2,'Andres','Smith','0987654321','andres@gmail.com');
+insert into CLIENTE values (3,'Nicole','Lucas','0987654321','nicole@gmail.com');
+insert into CLIENTE values (4,'Guadalupe','Lopez','0987654321','lupe@gmail.com');
+insert into CLIENTE values (5,'Anita','Valeriano','0987654321','anita@gmail.com');
+insert into CLIENTE values (6,'Jose','Muentes','0987654321','jose@gmail.com');
+insert into CLIENTE values (7,'Juan','Posligua','0987654321','juan@gmail.com');
+insert into CLIENTE values (8,'Pedro','Mantuano','0987654321','pedrom@gmail.com');
+insert into CLIENTE values (9,'Maricela','Quijije','0987654321','maricelaq@gmail.com');
+insert into CLIENTE values (10,'Karla','Vela','0987654321','karlav@gmail.com');
+
+
+/*==============================================================*/
+/* Insetar los detalles de la reserva                           */
+/*==============================================================*/
+
+insert into DETALLE_RESERVA values (1,1,1,1,1,5,'primera reserva');
+insert into DETALLE_RESERVA values (2,1,2,2,2,5,'reserva');
+insert into DETALLE_RESERVA values (3,1,3,3,3,1,'reserva');
+insert into DETALLE_RESERVA values (4,2,4,1,4,2,'reserva');
+insert into DETALLE_RESERVA values (5,2,5,1,5,3,'reserva');
+insert into DETALLE_RESERVA values (6,3,6,3,6,3,'reserva');
+insert into DETALLE_RESERVA values (7,3,7,2,7,2,'reserva');
+insert into DETALLE_RESERVA values (8,2,8,1,8,5,'reserva');
+insert into DETALLE_RESERVA values (9,4,9,1,9,3,'reserva');
+insert into DETALLE_RESERVA values (10,4,10,6,10,4,'reserva');
+
+
+/*==============================================================*/
+/* Insertar las Facturas                                        */
+/*==============================================================*/
+
+insert into FACTURA values (0001,1,1,'8/12/2020',300,12);
+insert into FACTURA values (0002,1,2,'14/06/2020',300,12);
+insert into FACTURA values (0003,1,3,'8/08/2020',300,12);
+insert into FACTURA values (0004,1,4,'8/12/2020',300,12);
+insert into FACTURA values (0005,1,5,'8/09/2019',300,12);
+insert into FACTURA values (0006,1,6,'19/08/2020',300,12);
+insert into FACTURA values (0007,1,7,'24/01/2020',300,12);
+insert into FACTURA values (0008,1,8,'30/07/2020',300,12);
+insert into FACTURA values (0009,1,9,'8/09/2020',300,12);
+insert into FACTURA values (0010,1,10,'11/04/2020',300,12);
