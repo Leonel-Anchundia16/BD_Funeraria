@@ -1,0 +1,175 @@
+/*==============================================================*/
+/* Table: CAUSA_FALLECIMIENTO                                   */
+/*==============================================================*/
+create table CAUSA_FALLECIMIENTO (
+   ID_CAUSA_MUERTE      INT4                 not null,
+   C_MUERTE_DESCRIPCION CHAR(50)             null,
+   constraint PK_CAUSA_FALLECIMIENTO primary key (ID_CAUSA_MUERTE)
+);
+
+/*==============================================================*/
+/* Table: CLIENTE                                               */
+/*==============================================================*/
+create table CLIENTE (
+   ID_CLIENTE           INT4                 not null,
+   CLI_NOMBRE           CHAR(20)             null,
+   CLI_APELLIDO         CHAR(20)             null,
+   CLI_TELEFONO         NUMERIC(10)          null,
+   CLI_CORREO           CHAR(30)             null,
+   constraint PK_CLIENTE primary key (ID_CLIENTE)
+);
+
+/*==============================================================*/
+/* Table: DETALLE_RESERVA                                       */
+/*==============================================================*/
+create table DETALLE_RESERVA (
+   ID_RESERVA           INT4                 not null,
+   ID_VELATORIO         INT4                 null,
+   ID_FALLECIDO         INT4                 null,
+   ID_EMPLEADO          INT4                 null,
+   ID_CLIENTE           INT4                 null,
+   ID_SERVICIO          INT4                 null,
+   RESERV_DESCRIPCION   CHAR(100)            null,
+   constraint PK_DETALLE_RESERVA primary key (ID_RESERVA)
+);
+
+/*==============================================================*/
+/* Table: EMPLEADO                                              */
+/*==============================================================*/
+create table EMPLEADO (
+   ID_EMPLEADO          INT4                 not null,
+   ID_FUNERARIA         INT4                 null,
+   ID_TIP_EMPLEADO      INT4                 null,
+   EM_NOMBRE            CHAR(20)             null,
+   EM_APELLIDO          CHAR(20)             null,
+   EM_DIRECCION         CHAR(30)             null,
+   E__FECHA_NACIMIENTO  DATE                 null,
+   EM_FECHA_INGRESO     DATE                 null,
+   constraint PK_EMPLEADO primary key (ID_EMPLEADO)
+);
+
+/*==============================================================*/
+/* Table: FACTURA                                               */
+/*==============================================================*/
+create table FACTURA (
+   ID_FACTURA           INT4                 not null,
+   ID_FUNERARIA         INT4                 null,
+   ID_RESERVA           INT4                 null,
+   FAC_FECHA            DATE                 null,
+   FAC_PRECIO           FLOAT8               null,
+   FAC_IVA              INT4                 null,
+   constraint PK_FACTURA primary key (ID_FACTURA)
+);
+
+/*==============================================================*/
+/* Table: FALLECIDO                                             */
+/*==============================================================*/
+create table FALLECIDO (
+   ID_FALLECIDO         INT4                 not null,
+   ID_CAUSA_MUERTE      INT4                 null,
+   FALL_NOMBRE          CHAR(20)             null,
+   FALL_APELLIDO        CHAR(20)             null,
+   FALL_GENERO          CHAR(15)             null,
+   FALL_FECHA_NACIMIENTO DATE                 null,
+   FALL_FECHA_DEFUNSION DATE                 null,
+   FALL_HORA_DEFUNSION  TIME                 null,
+   constraint PK_FALLECIDO primary key (ID_FALLECIDO)
+);
+
+/*==============================================================*/
+/* Table: FUNERARIA_ETERNIDAD                                   */
+/*==============================================================*/
+create table FUNERARIA_ETERNIDAD (
+   ID_FUNERARIA         INT4                 not null,
+   FUN_DIRECCION        CHAR(50)             null,
+   constraint PK_FUNERARIA_ETERNIDAD primary key (ID_FUNERARIA)
+);
+
+/*==============================================================*/
+/* Table: SALA_VELATORIO                                        */
+/*==============================================================*/
+create table SALA_VELATORIO (
+   ID_VELATORIO         INT4                 not null,
+   ID_FUNERARIA         INT4                 null,
+   VE_DIMENSIONES       CHAR(30)             null,
+   VE_DIRECCION         CHAR(50)             null,
+   VE_CAPACIDAD         INT4                 null,
+   VE_HORA_RESERVA      TIME                 null,
+   constraint PK_SALA_VELATORIO primary key (ID_VELATORIO)
+);
+
+/*==============================================================*/
+/* Table: SERVICIO                                              */
+/*==============================================================*/
+create table SERVICIO (
+   ID_SERVICIO          INT4                 not null,
+   SERV_NOMBRE          CHAR(30)             null,
+   SERV_PRECIO          FLOAT8               null,
+   SERV_TIEMPO          TIME                 null,
+   constraint PK_SERVICIO primary key (ID_SERVICIO)
+);
+
+/*==============================================================*/
+/* Table: TIPO_EMPLEADO                                         */
+/*==============================================================*/
+create table TIPO_EMPLEADO (
+   ID_TIP_EMPLEADO      INT4                 not null,
+   TIP_EMP_DESCRIPCION  CHAR(25)             null,
+   constraint PK_TIPO_EMPLEADO primary key (ID_TIP_EMPLEADO)
+);
+
+alter table DETALLE_RESERVA
+   add constraint FK_DETALLE__RELATIONS_SERVICIO foreign key (ID_SERVICIO)
+      references SERVICIO (ID_SERVICIO)
+      on delete restrict on update restrict;
+
+alter table DETALLE_RESERVA
+   add constraint FK_DETALLE__RELATIONS_SALA_VEL foreign key (ID_VELATORIO)
+      references SALA_VELATORIO (ID_VELATORIO)
+      on delete restrict on update restrict;
+
+alter table DETALLE_RESERVA
+   add constraint FK_DETALLE__RELATIONS_FALLECID foreign key (ID_FALLECIDO)
+      references FALLECIDO (ID_FALLECIDO)
+      on delete restrict on update restrict;
+
+alter table DETALLE_RESERVA
+   add constraint FK_DETALLE__RELATIONS_EMPLEADO foreign key (ID_EMPLEADO)
+      references EMPLEADO (ID_EMPLEADO)
+      on delete restrict on update restrict;
+
+alter table DETALLE_RESERVA
+   add constraint FK_DETALLE__RELATIONS_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTE (ID_CLIENTE)
+      on delete restrict on update restrict;
+
+alter table EMPLEADO
+   add constraint FK_EMPLEADO_RELATIONS_TIPO_EMP foreign key (ID_TIP_EMPLEADO)
+      references TIPO_EMPLEADO (ID_TIP_EMPLEADO)
+      on delete restrict on update restrict;
+
+alter table EMPLEADO
+   add constraint FK_EMPLEADO_RELATIONS_FUNERARI foreign key (ID_FUNERARIA)
+      references FUNERARIA_ETERNIDAD (ID_FUNERARIA)
+      on delete restrict on update restrict;
+
+alter table FACTURA
+   add constraint FK_FACTURA_RELATIONS_DETALLE_ foreign key (ID_RESERVA)
+      references DETALLE_RESERVA (ID_RESERVA)
+      on delete restrict on update restrict;
+
+alter table FACTURA
+   add constraint FK_FACTURA_RELATIONS_FUNERARI foreign key (ID_FUNERARIA)
+      references FUNERARIA_ETERNIDAD (ID_FUNERARIA)
+      on delete restrict on update restrict;
+
+alter table FALLECIDO
+   add constraint FK_FALLECID_RELATIONS_CAUSA_FA foreign key (ID_CAUSA_MUERTE)
+      references CAUSA_FALLECIMIENTO (ID_CAUSA_MUERTE)
+      on delete restrict on update restrict;
+
+alter table SALA_VELATORIO
+   add constraint FK_SALA_VEL_RELATIONS_FUNERARI foreign key (ID_FUNERARIA)
+      references FUNERARIA_ETERNIDAD (ID_FUNERARIA)
+      on delete restrict on update restrict;
+
