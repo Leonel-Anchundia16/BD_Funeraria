@@ -1,0 +1,52 @@
+
+/*==============================================================*/
+/* Consulta 1: Hora de defuncion - Hora de embalsamamiento      */
+/* filtrado por id                                              */
+/*==============================================================*/
+
+select ID_VELATORIO, SERVICIO.SERV_TIEMPO, FALLECIDO.FALL_HORA_DEFUNSION
+from DETALLE_RESERVA inner join SERVICIO on DETALLE_RESERVA.ID_SERVICIO= SERVICIO.ID_SERVICIO
+inner join FALLECIDO on DETALLE_RESERVA.ID_FALLECIDO=FALLECIDO.ID_FALLECIDO
+where DETALLE_RESERVA.ID_SERVICIO=4;
+
+/*==============================================================*/
+/* Consulta 1: Hora de defuncion - Hora de embalsamamiento      */
+/* filtrado por nombre del servicio                             */
+/*==============================================================*/
+select  AVG(SERVICIO.SERV_TIEMPO), AVG(FALLECIDO.FALL_HORA_DEFUNSION), 
+sum(SERVICIO.SERV_TIEMPO)as TiempoPromedio
+from DETALLE_RESERVA inner join SERVICIO on DETALLE_RESERVA.ID_SERVICIO= SERVICIO.ID_SERVICIO
+inner join FALLECIDO on DETALLE_RESERVA.ID_FALLECIDO=FALLECIDO.ID_FALLECIDO
+where SERVICIO.SERV_NOMBRE='Embalsamamiento';
+
+
+/*==============================================================*/
+/* Consulta 2: Veces en que cada sala se alquila y no se vende  */ 
+/*   ataud                                                      */
+/*==============================================================*/
+
+select ID_VELATORIO, count(DETALLE_RESERVA.ID_SERVICIO) as cantidad_veces_alquilada
+from DETALLE_RESERVA 
+where ID_SERVICIO<5
+group by ID_VELATORIO having count (DETALLE_RESERVA.ID_SERVICIO)>=1
+
+
+/*==============================================================*/
+/* Consulta 3: Agentes que venderion Ataud                      */
+/*==============================================================*/
+
+select   EMPLEADO.EM_NOMBRE, ID_VELATORIO, SERVICIO.SERV_NOMBRE 
+from DETALLE_RESERVA inner join EMPLEADO on DETALLE_RESERVA.ID_EMPLEADO= EMPLEADO.ID_EMPLEADO
+inner join SERVICIO on DETALLE_RESERVA.ID_SERVICIO=SERVICIO.ID_SERVICIO
+where SERV_NOMBRE='Venta de Ataud';
+
+
+/*==============================================================*/
+/* Consulta 4: Suma de cada causa de muerte                     */
+/*==============================================================*/
+
+select CAUSA_FALLECIMIENTO.C_MUERTE_DESCRIPCION , count(FALLECIDO.ID_CAUSA_MUERTE)as Total 
+from FALLECIDO inner join CAUSA_FALLECIMIENTO on FALLECIDO.ID_CAUSA_MUERTE=CAUSA_FALLECIMIENTO.ID_CAUSA_MUERTE
+group by CAUSA_FALLECIMIENTO.ID_CAUSA_MUERTE having count (FALLECIDO.ID_CAUSA_MUERTE)>=1;
+
+
