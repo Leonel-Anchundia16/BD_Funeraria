@@ -1,0 +1,21 @@
+2do Parcial. Un procedimiento almacenado que devuelva los ingresos obtenidos por servicios, de una sala que se le pase como parámetro.
+
+
+
+create or replace function obtener_ingresos(
+	IN servi int4,
+	OUT datos varchar
+)
+as $$
+	
+begin 
+	select 
+	sum(SERVICIO.SERV_PRECIO ) into datos
+	from DETALLE_RESERVA inner join  SERVICIO on DETALLE_RESERVA.ID_SERVICIO=SERVICIO.ID_SERVICIO
+	inner join SALA_VELATORIO  on DETALLE_RESERVA.ID_VELATORIO=SALA_VELATORIO .ID_VELATORIO
+	where   DETALLE_RESERVA.ID_VELATORIO=servi;
+end
+$$
+language plpgsql;
+
+select * from obtener_ingresos(1)
