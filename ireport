@@ -1,0 +1,5 @@
+conteo de las causas de muerte. 
+
+select  c_muerte_descripcion, count(fallecido.id_causa_muerte) 
+from fallecido inner join causa_fallecimiento on fallecido.id_causa_muerte=causa_fallecimiento.id_causa_muerte 
+group by causa_fallecimiento.c_muerte_descripcion
