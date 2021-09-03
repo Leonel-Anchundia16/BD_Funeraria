@@ -1,0 +1,16 @@
+2do Parcial. Un cursor que muestre los ingresos obtenidos por servicio de todos los vendedores. 
+
+
+do $$
+declare
+registro servicio;
+total_ingresos cursor for select servicio.serv_nombre as servicio, sum(SERVICIO.SERV_PRECIO) as ingreso
+from SERVICIO inner join DETALLE_RESERVA on DETALLE_RESERVA.ID_SERVICIO=SERVICIO.ID_SERVICIO
+group by   servicio.serv_nombre;
+begin
+	for registro in total_ingresos loop
+	 Raise notice 'Servicio: %, Ingresos obtenidos: %',
+	 registro.servicio, registro.ingreso;
+	 end loop;
+end $$
+language 'plpgsql';
